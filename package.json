@@ -1,0 +1,20 @@
+{
+  "name": "servemywallets",
+  "description": "The API to distribute AllMyWallets upgrades",
+  "repository": "https://github.com/allmywallets/servemywallets.git",
+  "author": "Quentin de Longraye",
+  "license": "MIT",
+  "main": "src/",
+  "scripts": {
+    "start": "node src/"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
+    "dotenv": "^4.0.0",
+    "express": "^4.16.2",
+    "sequelize": "^4.28.6",
+    "sqlite3": "^3.1.13",
+    "web-push": "^3.2.5"
+  }
+}
