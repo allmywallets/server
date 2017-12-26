@@ -1,13 +1,13 @@
 require('dotenv').config()
 const server = require('./server')
 const database = require('./database')
-const webPush = require('./web-push')
+const push = require('./push')
 
 const pushRate = 1000 * 60 * 15 // 15 minutes
 
 server.init()
   .then(app => {
-    webPush.init().registerRoute(app, database.saveEndpoint)
+      push.init().registerRoute(app, database.saveEndpoint)
 
     return database.init()
   })
@@ -16,7 +16,7 @@ server.init()
       endpointsDatabase.findAll().then(endpoints => {
         console.log(`Notifying ${endpoints.length} endpoints`)
 
-        endpoints.forEach(endpoint => webPush.notify(endpoint.url))
+        endpoints.forEach(endpoint => push.notify(endpoint.url))
       })
     }, pushRate)
 
