@@ -3,6 +3,8 @@ const url = require('url')
 
 function init () {
   webPush.setVapidDetails('https://allmywallets.io', process.env.VAPID_PUBLIC, process.env.VAPID_PRIVATE)
+
+  return this
 }
 
 function registerRoute (app, saveEndpoint) {
