@@ -38,7 +38,7 @@ function startNotifier (model) {
       console.log(`Notifying ${endpoints.length} endpoints`)
 
       endpoints.forEach(function (endpoint) {
-        webPush.sendNotification({ endpoint: endpoint.url })
+        webPush.sendNotification({ endpoint: endpoint.url }, null, { TTL: pushRate/1000 })
       })
     })
   }, pushRate)

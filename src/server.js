@@ -12,7 +12,7 @@ function init () {
   app.use(bodyParser.json())
 
   app.use('/', function (req, res, next) {
-    if(!req.secure && process.env.NODE_ENV === 'production') {
+    if(req.get('X-Forwarded-Proto') !== 'https' && process.env.NODE_ENV === 'production') {
       const secureUrl = "https://" + req.headers['host'] + req.url;
       res.writeHead(301, { "Location":  secureUrl });
       res.end();
