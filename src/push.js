@@ -13,8 +13,8 @@ function registerRoute (app, model) {
 
     const stats = {
       total: await model.count(),
-      lastDay: await model.count({ where: { updatedAt: {[Op.gt]: yesterday }}}),
-      lastMonth: await model.count({ where: { updatedAt: {[Op.gt]: lastMonth }}})
+      lastDay: await model.count({ where: { updatedAt: { [Op.gt]: yesterday } } }),
+      lastMonth: await model.count({ where: { updatedAt: { [Op.gt]: lastMonth } } })
     }
 
     return res.status(200).json({ stats: stats }).end()
@@ -29,7 +29,7 @@ function registerRoute (app, model) {
 
     let code = 500
     try {
-      const existing = await model.findOne({where: {url: endpoint}})
+      const existing = await model.findOne({ where: { url: endpoint } })
 
       if (existing) {
         await existing.update({url: endpoint})
@@ -54,7 +54,7 @@ function startNotifier (model) {
       console.log(`Notifying ${endpoints.length} endpoints`)
 
       endpoints.forEach(function (endpoint) {
-        webPush.sendNotification({ endpoint: endpoint.url }, null, { TTL: pushRate/1000 })
+        webPush.sendNotification({ endpoint: endpoint.url }, null, { TTL: pushRate / 1000 })
       })
     })
   }, pushRate)

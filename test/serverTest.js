@@ -13,7 +13,7 @@ test.beforeEach(async t => {
   await push.init(app, model)
 
   app.listen()
-  
+
   t.context = { app: app }
 })
 
