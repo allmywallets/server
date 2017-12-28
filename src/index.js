@@ -3,23 +3,13 @@ const server = require('./server')
 const database = require('./database')
 const push = require('./push')
 
-const pushRate = 1000 * 60 * 15 // 15 minutes
+async function run () {
+  const app = await server.init()
+  const db = await database.init()
 
-server.init()
-  .then(app => {
-      push.init().registerRoute(app, database.saveEndpoint)
+  await push.init(app, db)
 
-    return database.init()
-  })
-  .then((endpointsDatabase) => {
-    setInterval(() => {
-      endpointsDatabase.findAll().then(endpoints => {
-        console.log(`Notifying ${endpoints.length} endpoints`)
+  server.listen()
+}
 
-        endpoints.forEach(endpoint => push.notify(endpoint.url))
-      })
-    }, pushRate)
-
-    server.listen()
-  })
-  .catch(e => console.error(e))
+run()

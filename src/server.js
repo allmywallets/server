@@ -7,7 +7,7 @@ const corsOptions = {
   origin: process.env.CORS_ORIGIN
 }
 
-async function init () {
+function init () {
   app.use(cors(corsOptions))
   app.use(bodyParser.json())
 
@@ -15,7 +15,8 @@ async function init () {
 }
 
 function listen () {
-  app.listen(3030, () => console.log('Server listening on port 3030'));
+  const port = process.env.PORT || 3030
+  app.listen(port, () => console.log(`Server listening on port ${port}`))
 }
 
 module.exports = { init, listen }

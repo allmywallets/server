@@ -1,24 +1,23 @@
 const Sequelize = require('sequelize')
 
-let model = null
-function init () {
+async function init () {
   const database = new Sequelize('allmywallets', null, null, {
     dialect: 'sqlite',
     storage: 'endpoints.sqlite',
-    operatorsAliases: false
+    operatorsAliases: false,
+    logging: false
   })
 
-  model = database.define('endpoint', {
+  const model = database.define('endpoint', {
     url: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
+      allowNull: false
     }
   })
 
-  return database.sync().then(() => model)
+  await database.sync()
+
+  return model
 }
 
-function saveEndpoint (endpoint) {
-  return model.create({ url: endpoint, allowNull: false })
-}
-
-module.exports = { init, saveEndpoint }
+module.exports = { init }
