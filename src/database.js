@@ -3,7 +3,7 @@ const Sequelize = require('sequelize')
 async function init () {
   const database = new Sequelize('allmywallets', null, null, {
     dialect: 'sqlite',
-    storage: 'endpoints.sqlite',
+    storage: process.env.NODE_ENV === 'production' ? 'endpoints.sqlite' : ':memory:',
     operatorsAliases: false,
     logging: false
   })
