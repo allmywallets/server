@@ -1,6 +1,6 @@
 {
   "name": "servemywallets",
-  "description": "The API to distribute AllMyWallets upgrades",
+  "description": "The API to dispatch AllMyWallets sync orders",
   "repository": "https://github.com/allmywallets/servemywallets.git",
   "author": "Quentin de Longraye",
   "license": "MIT",
